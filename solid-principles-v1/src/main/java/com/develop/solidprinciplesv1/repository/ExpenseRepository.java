@@ -1,6 +1,6 @@
 package com.develop.solidprinciplesv1.repository;
 
-import com.develop.solidprinciplesv1.entity.Expense;
+import com.develop.solidprinciplesv1.core.entity.Expense;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

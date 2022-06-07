@@ -115,6 +115,32 @@ También estamos trasladando todos los módulos relacionados con la lógica empr
 de la gestión del flujo de cajas. En aras de la exhaustividad, las entidades se amplían con nuevas
 columnas junto con otras operaciones CRUD.
 
+![diagrama_ocp_step_1](solid-principles-v1/docs/diagrama_ocp_refactored_step_1.png)
+
+- feature/ocp-refactored-step-1: rama donde se tiene la primera etapa donde se aplica ocp
+
+El ejemplo para "ocp-refactored-step-1" fue un gran toque arquitectónico para la aplicación.<br>
+Pero echemos un vistazo a un ejemplo más con más contexto de bajo nivel.
+Por lo tanto, **existe la necesidad de una nueva funcionalidad** en la que se debe 
+**calcular la cantidad total de ingresos y gastos** <br/> <br/>
+Por supuesto, el cálculo central se puede realizar en las clases de ServiceImpl, pero no sería un paso
+inteligente, ya que modificaríamos nuestra lógica comercial ((business logic)) en lugar de extenderla.<br>
+
+- feature/ocp-refactored-step-2: rama donde se tiene la última etapa donde se aplica ocp 
+para atender una nueva funcionalidad.
+
+
+Por lo tanto, la forma correcta de implementar esta funcionalidad mediante la ampliación de la gestión
+del flujo de efectivo (cashflow) **es crear un nuevo CalculatorService** que también manejará en el 
+futuro todo tipo de cálculos y dejar que diferentes implementaciones de casos de uso lleven el código
+para el cálculo (consulte las clases IncomeCalculatorServiceImpl y ExpenseCalculatorServiceImpl)<br><br>
+Entonces, si mañana necesitamos un nuevo caso de uso para calcular la cantidad total, 
+no modificaremos nuestra lógica comercial (business logic), sino que agregaremos una nueva clase de
+implementación más.Para cambiar diferentes implementaciones del cálculo, las anotaciones @Qualifer 
+y @Component se utilizan en Spring Framework Context.
+
+![diagrama_ocp_step_2](solid-principles-v1/docs/diagrama_ocp_refactored_step_2.png)
+
 
 ## Docker
 
