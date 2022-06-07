@@ -12,7 +12,7 @@ https://medium.com/geekculture/how-to-apply-solid-software-design-principles-to-
 *  DIP: Dependency Inversion Principle
 
 
-### SPR
+### SPR (Single Responsibility Principle)
 
 **_Un módulo debe ser responsable ante uno y solo un actor (Robert C. Martín)_**
 
@@ -54,6 +54,66 @@ SPR
 |------------------------------------------------------------------------|------------------------------------------------------------------------|
 | ![spr_initial_diagram](solid-principles-v1/docs/spr_initial_class.png) | ![spr_refactored_diagram](solid-principles-v1/docs/spr_refactored.png) |
 
+
+### OCP (Open-Closed Principle)
+
+**_Un artefacto de software debe estar abierto para extensión pero cerrado para modificación_**
+
+Esta simple descripción del principio fue introducida por primera vez por **Bertrand Meyer**.
+El sistema de software que necesita modificaciones cada vez para cualquier funcionalidad adicional es
+simplemente un gran desastre. Por otro lado, este tipo de programa caótico recibe errores ocasionales
+cada vez que se realiza una modificación. Preferiblemente, cada nueva funcionalidad debe tener el
+máximo de código nuevo y el mínimo de cambios en el código antiguo, en un mundo ideal:
+_cero cambios en el código antiguo._
+
+Desde el punto de vista de la arquitectura, antes de estructurar cualquier sistema de software,
+cada desarrollador debe pensar cuidadosamente que componentes deben estar libres de cambios y organizar
+el flujo de dependencia para que los componentes importantes (complementos, paquetes, clases..) no necesiten
+cambios cuando los componentes menos importantes son los que en verdad necesitan un cambio.
+Por lo tanto, el flujo de dependencia de un software debe dirigirse a los componentes que más desea proteger.
+
+
+**_Si el componente A debe protegerse de los cambios en el componente B, entonces el componente B debe aprender
+del componente A y no de otra manera._**
+
+Afortunadamente, las capacidades de la programación orientada a objetos son capaces de manejar este
+tipo de problemas. **El polimorfismo, mediante el uso de clases super/child y la IoC (inversion of control),
+mediante el uso de interfaces (en términos Java)** Son dos técnicas poderosas que podemos usar para
+lograr el principio Open/closed.
+
+> Polimorfismo significa "muchas formas" y ocurre cuando tenemos muchas clases que estan relacionadas 
+> entre sí por herencia. <br>
+> La Inversión de control (IoC) es invertir el flujo de control en comparación con el flujo 
+> de control tradicional.
+
+
+Si recordamos nuestra aplicación de gestión de flujo de efectivo (cashflow), podemos ver que el flujo de
+dependencia es en una dirección: de la vista a la Base de datos.<br>
+En el centro de la aplicación, hay clases de servicio que contienen la lógica comercial principal.<br>
+Los controladores están inyectando Servicios, pero no de otra manera.<br>
+Entonces: los cambios en los controladores no afectarán a los servicios.
+Con este tipo de vinculación unidireccional, hicimos que nuestros servicios fueran algo
+resistentes a los cambios en los controladores, lo cual es un efecto positivo con respecto a OCP.
+
+![SRP_parte_1](solid-principles-v1/docs/Diagrama_clases_SRP_parte1.png)
+
+
+Pero llevemos esta idea un paso más allá y agreguemos otra capa de abstracción entre controladores 
+y servicios. Por ahora, los cambios en los servicios afectarán a los controladores pero al aplicar 
+IoC (inversion de control), transformamos los servicios en interfaces con métodos abstractos 
+y permitimos que sean implementados por las clases **ServiceImpl** que son verdaderos implementadores
+de la lógica comercial y en consecuencia, aíslan la lógica comercial de los servicios de 
+los controladores.<br>
+Con esto también conseguimos ocultar información: ocultar los _Servicios_ a los _controladores_ y
+así evitar dependencias transitivas.
+
+> Las dependencias transitivas son una violación del principio general de que las entidades
+> de software no deben depender de cosas que no usan directamente.
+
+También estamos trasladando todos los módulos relacionados con la lógica empresarial al paquete
+"cashflow.core.*". Con todo esto en mente, echemos un vistazo al diagrama de clases refactorizado
+de la gestión del flujo de cajas. En aras de la exhaustividad, las entidades se amplían con nuevas
+columnas junto con otras operaciones CRUD.
 
 
 ## Docker
