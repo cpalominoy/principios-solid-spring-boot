@@ -50,6 +50,11 @@ SPR
 * feature/spr-refactored ( refactorizando aplicando SPR)
 
 
+| SPR Initial                                                            | SPR Refactored                                                         |
+|------------------------------------------------------------------------|------------------------------------------------------------------------|
+| ![spr_initial_diagram](solid-principles-v1/docs/spr_initial_class.png) | ![spr_refactored_diagram](solid-principles-v1/docs/spr_refactored.png) |
+
+
 
 ## Docker
 
