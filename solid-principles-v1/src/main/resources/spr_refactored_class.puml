@@ -1,0 +1,37 @@
+@startuml
+
+class IncomeController {
+    - IncomeService service;
+    + List<Income> getIncomes();
+}
+
+class ExpenseController {
+    - ExpenseService service;
+    + List<Expense> getExpenses();
+}
+
+
+class IncomeService {
+    - IncomeRepository income;
+    + List<Income> getIncomes();
+}
+
+class ExpenseService {
+    - ExpenseRepository Expense;
+    + List<Expense> getExpenses();
+}
+
+
+interface IncomeRepository{
+}
+
+interface ExpenseRepository{
+}
+
+
+
+IncomeController --> IncomeService
+ExpenseController --> ExpenseService
+IncomeService --> IncomeRepository
+ExpenseService --> ExpenseRepository
+@enduml

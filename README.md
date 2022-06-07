@@ -25,7 +25,7 @@ sin estar conectados directamente._**
 
 La clase que es responsable de una sola funcionalidad es fácil de entender,
 probar y mantener. Por "hacer una cosa" no se quiere decir que esta clase 
-deba hacer literalment una cosa. La clase puede realizar múltiples tareas
+deba hacer literalmente una cosa. La clase puede realizar múltiples tareas
 y tener numerosos métodos (No demasiados) pero al final del día, todos estos
 deberían servir para un actor/stakeholder/use case/funcionalidad etc.
 
