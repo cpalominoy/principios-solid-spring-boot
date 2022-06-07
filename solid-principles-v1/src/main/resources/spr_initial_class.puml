@@ -1,0 +1,26 @@
+@startuml
+
+class CashFlowController {
+    - CashFlowService service;
+    + List<Income> getIncomes();
+    + List<Expense> getExpenses();
+}
+
+class CashFlowService {
+    - IncomeRepository income;
+    - ExpenseRepository expense;
+    + List<Income> getIncomes();
+    + List<Expense> getExpenses();
+}
+
+
+interface IncomeRepository{
+}
+
+interface ExpenseRepository{
+}
+
+CashFlowController --> CashFlowService
+CashFlowService --> IncomeRepository
+CashFlowService --> ExpenseRepository
+@enduml
