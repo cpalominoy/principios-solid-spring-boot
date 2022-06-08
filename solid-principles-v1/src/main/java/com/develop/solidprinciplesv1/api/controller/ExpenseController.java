@@ -1,4 +1,4 @@
-package com.develop.solidprinciplesv1.controller;
+package com.develop.solidprinciplesv1.api.controller;
 
 import com.develop.solidprinciplesv1.core.service.ExpenseService;
 import com.develop.solidprinciplesv1.database.entity.Expense;
