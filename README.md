@@ -194,7 +194,33 @@ actividades de la base de datos.
 ![](solid-principles-v1/docs/estrutuctura_paquetes_v1.png)
 
 - feature/lsp-refactored-step-1: Base inicial del proyecto para aplicar LSP.
-- feature/lsp-refactored-step-2
+- feature/lsp-refactored-step-2: Cambios aplicando lsp
+
+Nos estamos moviendo ahora para estructurar nuestras interfaces de una manera que cumpla con LSP.<br>
+- Todas las interfaces del paquete cashflow.core.* se reunirán bajo un mismo paquete
+- IncomeService, ExpenseService que son inyectados por los Controllers y responsables de las 
+operaciones CRUD.
+- CalculatorService que es solo para cálculos matemáticos.
+
+Entonces, semánticamente, estos dos grupos de interfaz son diferentes, ya sea que sean elegibles
+para realizar operaciones CRUD o no. Recuerde que eliminamos las interfaces de repositorio JPA
+de las implementaciones de CalculatorService.
+
+Reunir todas estas interfaces bajo una interfaz abstracta sería una violación de LSP. <br>
+Entonces, lo que podemos hacer aquí es tener una interfaz maestra que sea Servicio, otra interfaz
+de repositorio debe extender este servicio y el servicio de IncomeService y ExpenseService también
+extienden el servicio de Repositorio (RepositoryService). <br>
+
+CalculationService extendera directamente la interfaz de servicio. Dado que los métodos en
+IncomeService y ExpenseService son idénticos además de los tipos de datos de 
+ingresos y resultados, podemos usar genéricos de Java para acumularlos todos en RepositoryService.
+
+Como puede ver, los subtipos de RepositoryService son mutuamente sustituibles y semánticamente iguales.
+Pero CalculatorService está asignado para realizar tareas completamente diferentes, por lo que no seria
+el hermano correcto para los servicios de ingresos y gastos.
+
+
+![](solid-principles-v1/docs/Diagrama_clases_lsp_parte2.png)
 
 
 ## Docker
