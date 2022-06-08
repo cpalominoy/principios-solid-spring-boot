@@ -1,9 +1,9 @@
 package com.develop.solidprinciplesv1.core.service.impl;
 
-import com.develop.solidprinciplesv1.core.entity.Expense;
 import com.develop.solidprinciplesv1.core.service.CalculatorService;
 import com.develop.solidprinciplesv1.core.service.ExpenseService;
-import com.develop.solidprinciplesv1.repository.ExpenseRepository;
+import com.develop.solidprinciplesv1.database.entity.Expense;
+import com.develop.solidprinciplesv1.database.entity.repository.ExpenseRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

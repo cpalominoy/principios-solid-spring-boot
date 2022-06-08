@@ -1,4 +1,4 @@
-package com.develop.solidprinciplesv1.core.entity;
+package com.develop.solidprinciplesv1.database.entity;
 
 import java.math.BigDecimal;
 import javax.persistence.Column;
@@ -10,11 +10,11 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+@Entity
+@Table(name = "expense")
 @Getter
 @Setter
-@Entity
-@Table(name = "income")
-public class Income {
+public class Expense {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)

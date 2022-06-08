@@ -1,6 +1,6 @@
 package com.develop.solidprinciplesv1.core.service;
 
-import com.develop.solidprinciplesv1.core.entity.Expense;
+import com.develop.solidprinciplesv1.database.entity.Expense;
 import java.util.List;
 
 public interface ExpenseService {

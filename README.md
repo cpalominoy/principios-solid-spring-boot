@@ -142,6 +142,61 @@ y @Component se utilizan en Spring Framework Context.
 ![diagrama_ocp_step_2](solid-principles-v1/docs/diagrama_ocp_refactored_step_2.png)
 
 
+### LSP (Liskov Substitution Principle)
+
+> Si para cada objeto o1 del tipo S hay un objeto o2 de tipo T tal que para todos los programas P
+> definidos en términos de T, el comportamiento de P no cambia cuando se sustituye o2 por o1, entonces
+> S es un subtipo de T
+
+Esta definición de Barbara Liskov puede sonar bastante confusa pero, en esencia, es un principio
+simple y fácil de entender. Si reafirmamos la definición anterior, el lema del principio es: <br>
+> cuando se utiliza la herencia, la jerarquía de la herencia debe ser coherente desde el punto de
+> de vista funcional y de la lógica comercial (business logic). <br>
+> Los subtipos deben ser mutuamente sustituibles y no alterar el comportamiento de la clase principal.
+
+Como un ejemplo simple, podemos tomar el problema del "cuadrado/rectángulo". Donde el cuadrado no debe
+ser un subtipo de rectángulo, porque la definición de altura y longitud de estas dos formas geométricas
+es diferente ( la altura y el peso del cuadrado son iguales, mientras que para el rectángulo variaran).
+
+Algunos puntos importantes a tener cuenta al construir la herencia para cumplir con LSP son:
+1. Mantenga las superclases lo más simple y abstractas que pueda, para que luego pueda ampliar
+   la funcionalidad sin alterar el comportamiento del objeto principal.
+2. Piénselo dos veces cuando construya relaciones padre-hijo para no tener jerarquías desordenadas
+   y si las clases secundarias son mutuamente sustituibles.
+3. El principio de los "4 ojos" es vital para diseñar la estructura del sistema de software, ya que
+   el diseño orientado a objetos puede ser, por un lado, poderoso pero también muy confuso.
+
+Así que echemos un vistazo a nuestra aplicación de gestión de flujo de efectivo e intentemos ampliar
+la funcionalidad de la aplicación mientras mantenemos el código fuente dentro de los límites del LSP.
+
+Para un ejemplo de LSP, vamos a modificar nuestra aplicación de gestión de flujo de efectivo
+inicialmente para adaptarla para una mayor refactorización de LSP.<br>
+- Como primer paso, vamos a refactorizar las clases de implementación CalculatorService
+- Suponemos que CalculatorService solo debe ser responsable del cálculo matemático.
+- Y todas las operaciones CRUD se realizan a través de los Servicios de IncomeService y ExpenseService.
+
+Entonces, con esa mente, no es necesario que las clases de implementación de la interfaz CalculatorService
+inyecten repositorios y tengan una conexión indirecta con la base de datos a través de las especificaciones
+JPA.
+
+![](solid-principles-v1/docs/expenseCalculatorServiceImpl_class.png)
+
+- Eliminaremos estas interfaces de repositorio y entregaremos esa información a través de los servicios
+IncomeService y ExpenseService, que solo son elegibles para conectarse a la Base de datos.
+- Por otro lado estamos aislando diferentes clases en diferentes paquetes según su área de
+responsabilidad bajo tres paquetes principales: "api", "core" y "database".
+- **el paquete cashflow.api.** es responsable de la conexión con la vista frontal.
+- **el paquete cashflow.core.** es la parte principal de la aplicación de gestión de flujo (cashflow) 
+en efectivo, como sabrá por los pasos anteriores, donde tenemos la lógica comercial principal.
+- **el paquete cashflow.database.** incluye las clases e interfaces que estan vinculadas a las 
+actividades de la base de datos.
+
+![](solid-principles-v1/docs/estrutuctura_paquetes_v1.png)
+
+- feature/lsp-refactored-step-1: Base inicial del proyecto para aplicar LSP.
+- feature/lsp-refactored-step-2
+
+
 ## Docker
 
 ### Mysql

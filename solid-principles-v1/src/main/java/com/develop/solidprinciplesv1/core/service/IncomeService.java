@@ -1,6 +1,6 @@
 package com.develop.solidprinciplesv1.core.service;
 
-import com.develop.solidprinciplesv1.core.entity.Income;
+import com.develop.solidprinciplesv1.database.entity.Income;
 import java.util.List;
 
 public interface IncomeService {

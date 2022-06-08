@@ -1,7 +1,7 @@
 package com.develop.solidprinciplesv1.core.service.impl;
 
 import com.develop.solidprinciplesv1.core.service.CalculatorService;
-import com.develop.solidprinciplesv1.repository.ExpenseRepository;
+import com.develop.solidprinciplesv1.database.entity.repository.ExpenseRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
