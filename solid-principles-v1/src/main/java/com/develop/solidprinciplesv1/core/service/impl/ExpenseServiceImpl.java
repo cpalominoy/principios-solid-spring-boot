@@ -3,7 +3,7 @@ package com.develop.solidprinciplesv1.core.service.impl;
 import com.develop.solidprinciplesv1.core.service.CalculatorService;
 import com.develop.solidprinciplesv1.core.service.ExpenseService;
 import com.develop.solidprinciplesv1.database.entity.Expense;
-import com.develop.solidprinciplesv1.database.entity.repository.ExpenseRepository;
+import com.develop.solidprinciplesv1.database.repository.ExpenseRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,34 +14,35 @@ public class ExpenseServiceImpl implements ExpenseService {
 
   private final ExpenseRepository expenseRepository;
 
-  private final CalculatorService expenseCalculator;
+  private final CalculatorService<Expense> expenseCalculator;
 
-  public List<Expense> getExpenses() {
+  @Override
+  public List<Expense> getAll() {
     return expenseRepository.findAll();
   }
 
   @Override
-  public Expense getExpense(Long id) {
+  public Expense get(Long id) {
     return expenseRepository.findById(id).orElse(null);
   }
 
   @Override
-  public void deleteExpense(Long id) {
+  public Expense create(Expense entity) {
+    return expenseRepository.save(entity);
+  }
+
+  @Override
+  public Expense save(Expense entity) {
+    return expenseRepository.save(entity);
+  }
+
+  @Override
+  public void delete(Long id) {
     expenseRepository.deleteById(id);
   }
 
   @Override
-  public Expense createExpense(Expense expense) {
-    return expenseRepository.save(expense);
-  }
-
-  @Override
-  public Expense saveExpense(Expense expense) {
-    return expenseRepository.save(expense);
-  }
-
-  @Override
-  public Integer getTotalExpenses() {
-    return expenseCalculator.calculateTotal();
+  public Integer getTotal() {
+    return expenseCalculator.calculateTotal(expenseRepository.findAll());
   }
 }

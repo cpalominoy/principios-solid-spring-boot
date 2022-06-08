@@ -1,6 +1,8 @@
 package com.develop.solidprinciplesv1.core.service;
 
-public interface CalculatorService {
+import java.util.List;
 
-  Integer calculateTotal();
+public interface CalculatorService<T> extends Service {
+
+  Integer calculateTotal(List<T> list);
 }

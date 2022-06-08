@@ -21,32 +21,32 @@ public class ExpenseController {
   private final ExpenseService expenseService;
 
   @GetMapping("/expenses")
-  public List<Expense> getExpense() {
-    return expenseService.getExpenses();
+  public List<Expense> getExpenses() {
+    return expenseService.getAll();
   }
 
   @GetMapping("/expense/{id}")
   public Expense getExpense(@PathVariable("id") Long id) {
-    return expenseService.getExpense(id);
+    return expenseService.get(id);
   }
 
   @DeleteMapping("/expense/{id}")
   public void deleteExpense(@PathVariable("id") Long id) {
-    expenseService.deleteExpense(id);
+    expenseService.delete(id);
   }
 
   @PostMapping("/expense")
   public Expense createExpense(@RequestBody Expense expense) {
-    return expenseService.createExpense(expense);
+    return expenseService.create(expense);
   }
 
   @PutMapping("/expense")
   public Expense saveExpense(@RequestBody Expense expense) {
-    return expenseService.saveExpense(expense);
+    return expenseService.save(expense);
   }
 
   @GetMapping("/expense/total")
   public Integer getTotalExpenses() {
-    return expenseService.getTotalExpenses();
+    return expenseService.getTotal();
   }
 }

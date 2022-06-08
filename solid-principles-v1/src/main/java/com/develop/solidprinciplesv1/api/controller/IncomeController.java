@@ -22,31 +22,31 @@ public class IncomeController {
 
   @GetMapping("/incomes")
   public List<Income> getIncomes() {
-    return incomeService.getIncomes();
+    return incomeService.getAll();
   }
 
   @GetMapping("/income/{id}")
   public Income getIncome(@PathVariable("id") Long id) {
-    return incomeService.getIncome(id);
-  }
-
-  @DeleteMapping("/income/{id}")
-  public void deleteIncome(@PathVariable("id") Long id) {
-    incomeService.deleteIncome(id);
+    return incomeService.get(id);
   }
 
   @PostMapping("/income")
   public Income createIncome(@RequestBody Income income) {
-    return incomeService.createIncome(income);
+    return incomeService.create(income);
   }
 
   @PutMapping("/income")
   public Income saveIncome(@RequestBody Income income) {
-    return incomeService.saveIncome(income);
+    return incomeService.save(income);
+  }
+
+  @DeleteMapping("/income/{id}")
+  public void deleteIncome(@PathVariable("id") Long id) {
+    incomeService.delete(id);
   }
 
   @GetMapping("/income/total")
   public Integer getTotalIncomes() {
-    return incomeService.getTotalIncomes();
+    return incomeService.getTotal();
   }
 }
