@@ -1,6 +1,7 @@
 package com.develop.solidprinciplesv1.core.service.impl;
 
 import com.develop.solidprinciplesv1.core.entity.Expense;
+import com.develop.solidprinciplesv1.core.service.CalculatorService;
 import com.develop.solidprinciplesv1.core.service.ExpenseService;
 import com.develop.solidprinciplesv1.repository.ExpenseRepository;
 import java.util.List;
@@ -12,6 +13,8 @@ import org.springframework.stereotype.Service;
 public class ExpenseServiceImpl implements ExpenseService {
 
   private final ExpenseRepository expenseRepository;
+
+  private final CalculatorService expenseCalculator;
 
   public List<Expense> getExpenses() {
     return expenseRepository.findAll();
@@ -35,5 +38,10 @@ public class ExpenseServiceImpl implements ExpenseService {
   @Override
   public Expense saveExpense(Expense expense) {
     return expenseRepository.save(expense);
+  }
+
+  @Override
+  public Integer getTotalExpenses() {
+    return expenseCalculator.calculateTotal();
   }
 }

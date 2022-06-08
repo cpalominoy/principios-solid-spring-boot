@@ -44,4 +44,9 @@ public class ExpenseController {
   public Expense saveExpense(@RequestBody Expense expense) {
     return expenseService.saveExpense(expense);
   }
+
+  @GetMapping("/expense/total")
+  public Integer getTotalExpenses() {
+    return expenseService.getTotalExpenses();
+  }
 }

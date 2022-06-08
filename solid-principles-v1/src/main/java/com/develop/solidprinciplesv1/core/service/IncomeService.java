@@ -14,4 +14,6 @@ public interface IncomeService {
   Income createIncome(Income income);
 
   Income saveIncome(Income income);
+
+  Integer getTotalIncomes();
 }
