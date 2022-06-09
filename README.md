@@ -223,6 +223,63 @@ el hermano correcto para los servicios de ingresos y gastos.
 ![](solid-principles-v1/docs/Diagrama_clases_lsp_parte2.png)
 
 
+### ISP (Interface Segregation Principle)
+
+> El principio de segregación de interfaces establece que ningún cliente debe verse obligado a
+> depender de métodos que no utiliza.
+
+Antes incluso de comenzar a explicar cuáles son las ideas de este principio, debemos dejar en claro
+que este principio se aplica principalmente a lenguajes de programación de tipado estático 
+(Statically-typed language) como Java, C, etc. 
+En lenguajes de tipado dinámico (Dynamically-typed language) como Python o Ruby, este principio no hace un gran sentido.
+
+> **Statically-typed language** se puede referir a los lenguajes donde el tipo de variables se conoce
+> en el momento de la compilación.<br>
+> **Dynamically-typed language** mientras que se ejecuta muchos comportamientos de programación
+> comunes en tiempo de ejecución.
+
+Según este principio, los componentes de software(complementos, paquetes, clases, etc) no deberían 
+tener dependencias que no utilicen. Afortunadamente, en casi todos los IDE modernos como eclipse o
+Intellij, hay una función de "Organizar importaciones" que eliminará las importaciones no utilizadas,
+pero el problema no es tan trivial.
+
+- feature/isp-refactored-step-1: 
+
+Entonces, si echamos un vistazo a nuestra "querida" aplicación de gestión de flujo de efectivo 
+(cash flow management application) , podemos imaginar una situación en la que nuestros casos de uso
+de ingresos y gastos dependan de una funcionalidad que tiene lógica comercial para ambos casos. <br>
+Por lo tanto, el caso de uso de ingresos tiene una gran dependencia de una funcionalidad que se usa
+para el caso de uso de gastos y el caso de uso de gastos tiene el mismo problema con respecto al
+caso de uso de ingresos.
+
+La siguiente es la violación de ISP basada en la discusión anterior:
+
+![](solid-principles-v1/docs/violacion_ISP.png)
+
+
+- feature/isp-refactored-step-2
+
+Dado que IncomeConverterServiceImpl y ExpenseConverterServiceImpl deben implementar métodos no 
+utilizados, lanzamos Exception para detectar esos casos, pero tendría sentido si los aislamos.<br> 
+Por lo tanto, cualquier  cambio en el método convertExpense() generará errores de compilación y
+la necesidad de un cambio en IncomeConverterServiceImpl, que incluso no necesita ese método.
+
+A continuación se muestra el diagrama de clases de interfaces refactorizado basado en el principio de 
+segregación de interfaces en el paquete cashflow.core.*:
+
+![](solid-principles-v1/docs/diagrama_isp_refactored_step_2.png)
+
+Básicamente, lo que hicimos aquí fue dividir ConverterServices en casos de uso y permitirles
+extender la interfaz de servicio abstracta. 
+
+Para nuestro ejemplo, puede que no sea la mejor solución, ya que solo tenemos un método 
+para implementar para cada caso de uso. Pero imagine una situación en la que tiene muchas interfaces
+que se implementan varias veces para diferentes contextos. Va ser un gran lío no?
+
+En realidad, se trata de ISP: divida los módulos en módulos más pequeñps para evitar dependencias
+no utilizadas.
+
+
 ## Docker
 
 ### Mysql
