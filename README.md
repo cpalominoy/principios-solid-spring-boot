@@ -279,6 +279,47 @@ que se implementan varias veces para diferentes contextos. Va ser un gran lío n
 En realidad, se trata de ISP: divida los módulos en módulos más pequeñps para evitar dependencias
 no utilizadas.
 
+### DIP (Dependency Inversion Principle)
+
+> **El principio de inversion de idenpendencia** es cuando los módulos de dependencia se invierten, 
+> lo que hace que los módulos de alto nivel sean independientes de los detalles de implementación del
+> módulo de bajo nivel.
+
+Para un sistema de software, el mundo ideal es cuando se logra la máxima flexibilidad.<br>
+DIP establece exactamente esto: las dependencias del código fuente deben importar solo abstracciones.
+
+- Los componentes de alto nivel deben conectarse a los componentes de bajo nivel, preferiblemente a
+través de abstracciones. Y las abstracciones no deberían depender de los detalles, los detalles
+deberían depender de las abstracciones.
+
+Tampoco debe olvidarse que existe una diferencia fundamental entre el principio de Inversión de Dependencia (DIP)
+y la Inversion de Control (IoC), aunque la idea básica es la misma.<br>
+IoC se involucra más en el nivel de framework (por ejemplo, como Spring Boot maneja la inicialización 
+de Beans) mientras que DIP debería ser parte de la actividad diaria de los programadores.
+
+Algunos consejos importantes de R.C.Martin sobre el principio de Inversion de dependencia(DIP)
+son los siguientes:
+
+1. No se refiera a clases concretas volátiles
+2. No derivar de clases concretas volátiles
+3. No anule funciones concretas
+4. Nunca menciones el nombre de algo concreto y volátil (un poco utópico)
+
+Una buena solución para DIP podría ser Abstract Factory Design Pattern. (revisar los patrones de diseño)
+
+Pero no es posible construir un sistema de software completamente sobre abstracciones. 
+Hay y habrá definitivamente clases con importaciones concretas.<br>
+El objetivo no debe ser evitado por completo, sino tener siempre cuidado con la volatilidad de las 
+clases al construir relaciones de diseño orientadas a objetos.
+
+En una parte práctica, no vamos a extender nuestra aplicación de gestión de flujo de efectivo 
+(cashflow), ya que implementamos DIP automáticamente en varios lugares.
+
+![](solid-principles-v1/docs/diagrama_dip_step_1.png)
+
+Esta es la versión final del diagrama de clase para los paquetes cashflow.core.*. <br>
+Al echar un vistazo más de cerca a la estructura de clases, se puede ver que el principio de inversion
+de dependencia ya se aplica en las interfaces de servicio converter, calculator y repository.
 
 ## Docker
 
