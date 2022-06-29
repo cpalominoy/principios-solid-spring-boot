@@ -1,9 +1,5 @@
 # principios-solid-spring-boot
 
-```text
-https://medium.com/geekculture/how-to-apply-solid-software-design-principles-to-spring-boot-application-part-1-6b886f6d943e
-```
-
 ## SOLID
 *  SRP: Single Responsibility Principle 
 *  OCP: Open-Closed Principle
@@ -285,5 +281,5 @@ no utilizadas.
 ### Mysql
 
 ```shell
-docker run -d -p 3306:3306  --name mysql-db -e MYSQL_ROOT_PASSWORD=cpalomino2022*** mysql 
+docker run -d -p 3306:3306  --name mysql-db -e MYSQL_ROOT_PASSWORD=******* mysql 
 ```
